@@ -56,6 +56,7 @@ pipeline{
                     bat "docker build -t ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG} ."
                 }
             }
+            }
             stage('Push Docker Image to Docker Hub'){
             steps {
             withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS_ID, usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {}
@@ -66,6 +67,4 @@ pipeline{
             }
         }
     }
-
-
 }
