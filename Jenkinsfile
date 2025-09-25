@@ -6,7 +6,7 @@ pipeline{
     stages{
         stage('checking'){
             steps{
-                git branch:'master', url:'https://github.com/nealukumies/otp1_timecalculation.git'
+                git branch:'main', url:'https://github.com/nealukumies/otp1_timecalculation.git'
             }
         }
 
