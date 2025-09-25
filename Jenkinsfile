@@ -57,14 +57,18 @@ pipeline{
                 }
             }
             }
-            stage('Push Docker Image to Docker Hub'){
-            steps {
-            withCredentials([usernamePassword(credentialsId: DOCKERHUB_CREDENTIALS_ID, usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {}
-                script {
-                    bat "docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%"
-                    bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
-                }
-            }
-        }
-    }
-}
+  stage('Push Docker Image to Docker Hub') {
+      steps {
+          withCredentials([usernamePassword(
+              credentialsId: DOCKERHUB_CREDENTIALS_ID,
+              usernameVariable: 'DOCKERHUB_USERNAME',
+              passwordVariable: 'DOCKERHUB_PASSWORD'
+          )]) {
+              script {
+                  bat "docker login -u %DOCKERHUB_USERNAME% -p %DOCKERHUB_PASSWORD%"
+                  bat "docker push ${DOCKERHUB_REPO}:${DOCKER_IMAGE_TAG}"
+              }
+          }
+      }
+  }
+  }
